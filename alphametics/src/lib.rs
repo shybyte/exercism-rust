@@ -91,7 +91,7 @@ impl Puzzle {
     }
 
     fn to_number(word: &Word, mapping: &Mapping) -> u32 {
-        word.iter().enumerate().fold(0, |acc, (i, c)| acc + (10 as u32).pow(i as u32) * mapping[c] as u32)
+         word.iter().rev().fold(0, |acc, c| acc * 10 + mapping[c] as u32)
     }
 
     fn solve(&self) -> Option<Mapping> {

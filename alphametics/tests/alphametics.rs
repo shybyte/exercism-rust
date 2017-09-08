@@ -56,7 +56,7 @@ fn test_puzzle_with_ten_letters() {
                 &[('A', 5), ('D', 3), ('E', 4), ('F', 7), ('G', 8), ('N', 0), ('O', 2), ('R', 1),
                   ('S', 6), ('T', 9)]);
     let t: Duration = now.elapsed().unwrap();
-    println!("now.elapsed() = {:?}", t.subsec_nanos() /1000000);
+    println!("now.elapsed() = {:}.{:03}", t.as_secs(), t.subsec_nanos() / 1000000);
 }
 
 
