@@ -25,7 +25,7 @@ impl Hand {
         }
     }
 
-    fn category_of(&self) -> HandCategory {
+    fn category(&self) -> HandCategory {
         let is_straight = self.is_straight();
         let all_have_same_suit = self.cards.iter().all(|c| c.suit == self.cards[0].suit);
 
@@ -172,7 +172,7 @@ pub enum HandCategory {
 }
 
 pub fn category_of_hand_str(hand: &str) -> HandCategory {
-    Hand::from(hand).category_of()
+    Hand::from(hand).category()
 }
 
 /// Given a list of poker hands, return a list of those hands which win.
