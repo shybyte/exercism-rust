@@ -6,6 +6,7 @@
 //! [canonical-data]: https://raw.githubusercontent.com/exercism/problem-specifications/master/exercises/book-store/canonical_data.json
 
 extern crate book_store;
+
 use book_store::*;
 
 /// Process a single test case for the property `total`
@@ -129,3 +130,17 @@ fn test_difficult() {
 fn test_difficult2() {
     process_total_case((vec![0, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4], vec![]), 100.0);
 }
+
+
+#[test]
+fn test_two_moves_needed() {
+    process_total_case((vec![1, 1, 2, 2, 3, 3, 4, 5, 1, 1, 2, 2, 3, 3, 4, 5], vec![]), 102.4);
+}
+
+#[test]
+fn scaling() {
+    let books = 10000;
+    process_total_case((vec![1; books], vec![]), books as f64 * 8.0);
+}
+
+//lowest_price(&[1; 1_usize << 31]);
