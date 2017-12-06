@@ -17,7 +17,7 @@ use book_store::*;
 /// Expected input format: ('basket', 'targetgrouping')
 fn process_total_case(input: (Vec<usize>, Vec<Vec<usize>>), expected: f64) {
     assert_eq!(
-        lowest_price(&input.0),
+        (lowest_price(&input.0) * 1000.0).round() / 1000.0,
         expected
     )
 }
@@ -137,10 +137,26 @@ fn test_two_moves_needed() {
     process_total_case((vec![1, 1, 2, 2, 3, 3, 4, 5, 1, 1, 2, 2, 3, 3, 4, 5], vec![]), 102.4);
 }
 
+//#[test]
+//fn scaling() {
+//    let books = 10_000;
+//    let start_time = SystemTime::now();
+//    process_total_case((vec![1; books], vec![]), books as f64 * 8.0);
+//    eprintln!("now.elapsed = {:?}", start_time.elapsed().unwrap().as_secs());
+//}
+
+use std::time::SystemTime;
+
 #[test]
-fn scaling() {
-    let books = 10000;
-    process_total_case((vec![1; books], vec![]), books as f64 * 8.0);
+fn scaling2() {
+    let start_time = SystemTime::now();
+    let pattern = vec![1, 1, 2, 2, 3, 3, 4, 5];
+    let repetitions = 10;
+    let books = pattern.iter().cloned().cycle().take(pattern.len() * repetitions).collect();
+    process_total_case((books, vec![]), repetitions as f64 * 51.2);
+    eprintln!("time = {:?}", start_time.elapsed().unwrap().as_secs());
 }
 
+
 //lowest_price(&[1; 1_usize << 31]);
+
