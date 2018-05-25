@@ -21,7 +21,7 @@ pub fn decode(key: &str, s: &str) -> Option<String> {
 }
 
 fn transform(key: &str, s: &str, transform_char: fn(char, char) -> char) -> Option<String> {
-    if { is_valid_input(key, s) } {
+    if { is_valid_string(key) && is_valid_string(s) } {
         Some(s.chars().zip(key.chars().cycle()).map(|(c, k)| transform_char(c, k)).collect())
     } else {
         None
@@ -36,15 +36,6 @@ fn decode_char(c: char, key: char) -> char {
     (((RANGE.len() as u8) + c as u8 - key as u8) % (RANGE.len() as u8) + RANGE.start) as char
 }
 
-fn is_in_range(c: char) -> bool {
-    RANGE.start <= c as u8 && c as u8 <= RANGE.end
-}
-
 fn is_valid_string(s: &str) -> bool {
-    !s.is_empty() && s.chars().all(is_in_range)
+    !s.is_empty() && s.chars().all(|c| RANGE.start <= (c as u8) && (c as u8) < RANGE.end)
 }
-
-fn is_valid_input(key: &str, s: &str) -> bool {
-    is_valid_string(key) && is_valid_string(s)
-}
-
